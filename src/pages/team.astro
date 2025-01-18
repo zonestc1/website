@@ -1,0 +1,16 @@
+---
+import Layout from '@layouts/Default.astro'
+import AboutCard from '@components/TeamCard.astro'
+import { people } from '@data/team.json'
+---
+
+<Layout title='About'>
+<>
+	{people.map((exec, index) =>
+		<AboutCard
+			key={index}
+			{...exec}
+		/>
+	)}
+</>
+</Layout>

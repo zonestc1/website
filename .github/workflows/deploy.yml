@@ -17,7 +17,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [18.x]
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -28,12 +28,13 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+        cache: 'npm'
 
     - run: npm ci
 
-    - run: npm run generate
+    - run: npm run build
       env:
-        google_calendar: ${{ secrets.API_KEY }}
+        PUBLIC_GOOGLE_CALENDAR: ${{ secrets.API_KEY }}
 
     - name: Upload website
       uses: shallwefootball/s3-upload-action@master
